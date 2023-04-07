@@ -6,6 +6,10 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const path = require('path');
 
+//import the routes
+const accounts = require('./routes/accounts');
+const counters = require('./routes/counters');
+
 //Setup the express app and modules
 const app = express();
 app.use(cors());
@@ -21,7 +25,10 @@ mongoose
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
 
-app.get('/', (req, res) => res.send('Hello World!'));
+//Setup the routes
+app.use('/api/accounts', accounts);
+app.use('/api/counters', counters);
 
+//Listen on the port
 app.listen(port, () => console.log(`Express app listening on port ${port}!`));
 
