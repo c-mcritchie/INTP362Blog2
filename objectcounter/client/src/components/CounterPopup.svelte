@@ -18,6 +18,9 @@
             count: count,
             description: description
         }];
+        counterName = '';
+        count = 0;
+        description = '';
         isActive = false;
     }
 

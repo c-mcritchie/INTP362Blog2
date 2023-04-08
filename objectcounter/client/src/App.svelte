@@ -39,7 +39,6 @@
     {:else if loggedIn}
         <div class="container content">
             <h1>Welcome {$account.username}</h1>
-            {console.log($account)}
             <button on:click={deleteAccount} class="button is-danger is-small">Delete Account</button>
             <button on:click={() => {save(); $account = {}}} class="button is-danger is-small">Logout</button>
         </div>

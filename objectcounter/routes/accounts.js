@@ -57,7 +57,9 @@ router.post('/findAccount', async (req, res) => {
 router.put('/', async (req, res) => {
     try {
         const { account } = req.body;
-        account.save();
+        const foundAccount = await Account.findOne({"_id": account._id});
+        foundAccount.counters = account.counters;
+        await foundAccount.save();
         if (!account) throw Error('No account found to update');
         res.status(200).json(account);
     } catch (err) {

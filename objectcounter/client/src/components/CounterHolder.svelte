@@ -11,11 +11,25 @@
 </script>
 
 <main>
-    <button on:click={() => {isPopupOpen = true}} class="button is-small">New counter</button>
+    <button on:click={() => {isPopupOpen = true}} class="button is-small is-info">New counter</button>
     <CounterPopup bind:isActive={isPopupOpen}/>
+    <br>
+
+    <div>
+        <div class="line"><div/>
+    </div>
+    <br>
     <div class="columns is-multiline">
-        {#each $account.counters as counter (counter._id)}
+        {#each $account.counters as counter (counter.name)}
             <Counter bind:counter={counter}/>
         {/each}
 
 </main>
+
+<style>
+    .line {
+        width: 90%;
+        border-bottom: 1px solid #e6e6e6;
+        margin: auto;
+    }
+</style>
