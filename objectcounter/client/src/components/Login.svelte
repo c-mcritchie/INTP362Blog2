@@ -30,7 +30,8 @@
                 method: 'post',
                 url: 'http://localhost:3000/api/accounts/createAccount/',
                 data: {
-                    username: name
+                    username: name,
+                    counters: []
                 }});
             $account = data;
         } catch (e) {

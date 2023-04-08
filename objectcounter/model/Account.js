@@ -5,6 +5,9 @@ const AccountSchema = new Schema({
     username: {
         type: String,
         required: true
+    },
+    counters: {
+        type: Array
     }
 });
 

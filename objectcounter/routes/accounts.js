@@ -30,8 +30,8 @@ router.get('/:username', async (req, res) => {
 
 //Set post route
 router.post('/createAccount', async (req, res) => {
-    const { username} = req.body;
-    const newAccount = new Account({ username});
+    const { username, counters} = req.body;
+    const newAccount = new Account({ username, counters });
     try {
         const account = await newAccount.save();
         if (!account) throw Error('Something went wrong saving the account');
@@ -52,6 +52,19 @@ router.post('/findAccount', async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 });
+
+//set PUT route
+router.put('/', async (req, res) => {
+    try {
+        const { account } = req.body;
+        account.save();
+        if (!account) throw Error('No account found to update');
+        res.status(200).json(account);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
 
 //Set delete route
 router.delete("/:id", async (req, res) => {

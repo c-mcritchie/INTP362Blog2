@@ -1,6 +1,6 @@
 const {Schema, model} = require('mongoose');
 
-//Account model
+//Counter model
 const CounterSchema = new Schema({
     name: {
         type: String,
@@ -13,10 +13,6 @@ const CounterSchema = new Schema({
     count: {
         type: Number,
         default: 0
-    },
-    accountId: {
-        type: String,
-        required: true
     }
 });
 

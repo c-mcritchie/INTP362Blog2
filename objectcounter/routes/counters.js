@@ -19,10 +19,10 @@ router.get('/', async (req, res) => {
 
 //Set post route
 router.post('/createCounter', async (req, res) => {
-    const { username} = req.body;
-    const newAccount = new Counters({ username});
+    const { name, description, count, accountId } = req.body;
+    const newCounter = new Counter({ name, description, count, accountId });
     try {
-        const counter = await newAccount.save();
+        const counter = await newCounter.save();
         if (!counter) throw Error('Something went wrong saving the new counter');
         res.status(200).json(counter);
     } catch (err) {

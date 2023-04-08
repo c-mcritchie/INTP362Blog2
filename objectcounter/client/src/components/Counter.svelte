@@ -1,10 +1,10 @@
 <script>
-    let count = 0;
-    export let name;
+
+    export let counter;
 </script>
 
 <main>
-    <p>{name}: {count}</p>
-    <button on:click={() => count++}>+</button>
-    <button on:click={() => count--}>-</button>
+    <p>{counter.name}: {counter.count}</p>
+    <button on:click={() => counter.count++}>+</button>
+    <button on:click={() => counter.count--}>-</button>
 </main>

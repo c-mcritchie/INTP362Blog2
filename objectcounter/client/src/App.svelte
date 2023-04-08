@@ -15,6 +15,21 @@
         $account = {};
     }
 
+    async function save() {
+        await axios({
+            method: 'put',
+            url: 'http://localhost:3000/api/accounts/',
+            data: {
+                account: $account
+            }
+        });
+    }
+
+    function logout() {
+        save();
+        $account = {};
+    }
+
 
 </script>
 
@@ -24,8 +39,9 @@
     {:else if loggedIn}
         <div class="container content">
             <h1>Welcome {$account.username}</h1>
+            {console.log($account)}
             <button on:click={deleteAccount} class="button is-danger is-small">Delete Account</button>
-            <button on:click={() => {$account = {}}} class="button is-danger is-small">Logout</button>
+            <button on:click={() => {save(); $account = {}}} class="button is-danger is-small">Logout</button>
         </div>
         <CounterHolder/>
     {/if}

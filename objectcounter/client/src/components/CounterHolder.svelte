@@ -1,24 +1,21 @@
 <script>
-    import {onMount} from "svelte";
+    import {onDestroy, onMount} from "svelte";
     import axios from "axios";
-    import {account, counters } from "../stores.js";
+    import {account} from "../stores.js";
+    import CounterPopup from "./CounterPopup.svelte";
+    import Counter from "./Counter.svelte";
 
-
-
-    onMount(async () => {
-        const data = await axios({
-            method: 'post',
-            url: 'https://localhost:3000/api/counters/getCounterByAccount',
-            data: {
-                accountId: $account.id
-            }
-        })
-    })
+    let isPopupOpen;
 
 
 </script>
 
 <main>
-
+    <button on:click={() => {isPopupOpen = true}} class="button is-small">New counter</button>
+    <CounterPopup bind:isActive={isPopupOpen}/>
+    <div class="columns is-multiline">
+        {#each $account.counters as counter (counter._id)}
+            <Counter bind:counter={counter}/>
+        {/each}
 
 </main>
