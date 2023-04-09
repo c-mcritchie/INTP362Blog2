@@ -1,17 +1,22 @@
 <script>
+    //Imports
     import axios from "axios";
     import {account} from "../stores.js";
+    import { fade } from 'svelte/transition';
 
+    //Variables from the input
     let savedName;
     let name = "";
 
+    //Account object from the server
     let storedAccount = {};
 
-
+    //Booleans to show the buttons
     let showLogin = false;
     let showCreate = false;
 
-
+    //reactive checks to show the check button
+    //and hide the login and create buttons if name is changed
     $: checkShown = (name !== savedName);
     $: if (name !== savedName) {
         savedName = undefined;
@@ -19,11 +24,13 @@
         showCreate = false;
     }
 
+    //set the stored login to the svelte store
     function login() {
         $account = storedAccount;
         console.log(account);
     }
 
+    //Create account, upload to server and set the account object
     async function create() {
         try {
             const { data } = await axios({
@@ -39,6 +46,9 @@
         }
     }
 
+
+    //Check if there is an account on the server with the same name,
+    //if there is, show the login button, if not, show the create button
     async function checkName() {
 
         try {
@@ -66,7 +76,7 @@
 
 </script>
 
-<main class="container content">
+<main class="container content" transition:fade >
     <h1 >Log in</h1>
     <div class="field has-addons">
         <p class="control is-expanded">

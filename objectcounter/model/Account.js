@@ -7,7 +7,8 @@ const AccountSchema = new Schema({
         required: true
     },
     counters: {
-        type: Array
+        type: Array,
+        default: []
     }
 });
 

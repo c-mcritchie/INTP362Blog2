@@ -11,7 +11,6 @@
     let description = '';
 
 
-
     function createCounter() {
         $account.counters = [...$account.counters, {
             name: counterName,

@@ -1,12 +1,18 @@
 <script lang="ts">
+    //Imports
     import CounterHolder from './components/CounterHolder.svelte';
+    import { fade } from 'svelte/transition';
     import Login from './components/Login.svelte';
     import { account } from './stores.js';
     import axios from "axios";
 
-    let loggedIn;
+
+
+    //Reactive check if logged in
     $: loggedIn = ($account.username !== undefined);
 
+
+    //Delete account function
     async function deleteAccount() {
         const res = await axios({
             method: 'delete',
@@ -15,6 +21,7 @@
         $account = {};
     }
 
+    //Save account function
     async function save() {
         await axios({
             method: 'put',
@@ -25,6 +32,7 @@
         });
     }
 
+    //Logout function
     function logout() {
         save();
         $account = {};
@@ -35,16 +43,17 @@
 
 <main class="box app container ">
     {#if !loggedIn}
+        <!-- If not logged in show login page -->
         <Login/>
     {:else if loggedIn}
-        <div class="container content">
+        <!-- If logged in show account page and counter holder -->
+        <div class="container content" transition:fade>
             <h1>Welcome {$account.username}</h1>
             <button on:click={deleteAccount} class="button is-danger is-small">Delete Account</button>
-            <button on:click={() => {save(); $account = {}}} class="button is-danger is-small">Logout</button>
+            <button on:click={logout} class="button is-danger is-small">Logout</button>
         </div>
         <CounterHolder/>
     {/if}
-
 </main>
 
 <style>
