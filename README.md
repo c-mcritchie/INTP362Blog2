@@ -1,3 +1,3 @@
 # INTP362Blog2
 
-A tech blog for INTP 362
+The project for a blog.
